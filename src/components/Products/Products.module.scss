@@ -1,0 +1,16 @@
+@import '../../styles/variables';
+
+.Products {
+  z-index: 1;
+
+  h1 {
+    font-size: 32px;
+    margin-bottom: 25px;
+  }
+
+  .ProductsContent {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 30px;
+  }
+}

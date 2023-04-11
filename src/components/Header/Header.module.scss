@@ -1,0 +1,18 @@
+@import '../../styles/variables';
+
+.Header {
+  padding: 10px 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid $grey;
+
+  .Logo {
+    cursor: pointer;
+
+    img {
+      width: 230px;
+      height: 30px;
+    }
+  }
+}

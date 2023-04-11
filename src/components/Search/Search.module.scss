@@ -1,0 +1,28 @@
+@import '../../styles/variables';
+
+.Search {
+  position: relative;
+
+  input {
+    padding: 10px 40px;
+    width: 300px;
+    border-radius: 20px;
+    outline: none;
+    border: 2px solid $grey;
+    font-size: 18px;
+
+    &:focus {
+      border-color: $green;
+    }
+  }
+
+  .Icon {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+
+    path {
+      fill: $grey;
+    }
+  }
+}

@@ -1,0 +1,18 @@
+@import '../../styles/variables';
+
+.Footer {
+  border-top: 1px solid $grey;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 5px 0;
+
+  img {
+    width: 40px;
+    height: 40px;
+  }
+
+  span {
+    font-size: 20px;
+  }
+} 
