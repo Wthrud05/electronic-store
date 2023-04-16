@@ -15,16 +15,40 @@
     }
 
     div {
+      position: relative;
       border: 2px solid $green;
-      padding: 7px 18px;
       border-radius: 20px;
       cursor: pointer;
       display: flex;
       justify-content: center;
       align-items: center;
+      width: 130px;
+      height: 38px;
 
       span {
-        margin-right: 5px;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 20px;
+        z-index: 10;
+        user-select: none;
+        padding-right: 10px;
+      }
+
+      .Icon {
+        position: absolute;
+        top: 13px;
+        right: 10px;
+        z-index: 1;
+      }
+
+      .Up {
+        position: absolute;
+        top: 13px;
+        right: 10px;
+        transform: rotate(180deg);
       }
     }
   }
@@ -43,9 +67,11 @@
       li {
         font-size: 18px;
         padding: 15px 20px;
+        cursor: pointer;
 
         &:hover {
           background: $white-pink;
+          border-radius: 10px;
         }
       }
     }

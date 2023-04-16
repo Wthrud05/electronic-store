@@ -10,4 +10,4 @@ export const navigationData = [
 
 export const categories = ['All', 'Headphones', 'Clocks', 'Smart home', 'Accessories']
 
-export const sortTypes = ['price', 'alphabet', 'rating']
+export const sortTypes = ['default', 'price', 'rating']

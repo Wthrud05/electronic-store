@@ -14,6 +14,7 @@ export type IProduct = {
     ch2: string
     ch3: string
   }
+  sort?: string
 }
 
 export interface ProductState {

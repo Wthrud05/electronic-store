@@ -1,26 +1,28 @@
-import React, { FC, useEffect } from 'react'
+import React, { FC, useEffect, useState } from 'react'
 import styles from './HomePage.module.scss'
 import Sale from '../../components/Sale/Sale'
 import Categories from '../../components/Categories/Categories'
 import Sort from '../../components/Sort/Sort'
 import { useSelector } from 'react-redux'
-import { fetchProducts } from '../../redux/products/slice'
+import { SortParams, fetchProducts } from '../../redux/products/slice'
 import { useAppDispatch, RootState } from '../../redux/store'
 import HomePageLoader from '../../components/Skeleton/HomePageLoader'
 import Products from '../../components/Products/Products'
 import ErrorHome from './ErrorHome'
+import { setCategory } from '../../redux/filters/slice'
 
 const HomePage: FC = () => {
   const dispatch = useAppDispatch()
   const { products, status } = useSelector((state: RootState) => state.products)
+  const { sort, category, search } = useSelector((state: RootState) => state.filters)
 
   useEffect(() => {
-    console.log(status)
+    dispatch(fetchProducts({ sort, category, search }))
+  }, [sort, category, search])
 
-    dispatch(fetchProducts())
-  }, [])
-
-  console.log(status)
+  const onCategoryChange = (category: string) => {
+    dispatch(setCategory(category))
+  }
 
   const loaders = [...new Array(8)].map((_, i) => <HomePageLoader key={i} />)
 
@@ -28,8 +30,8 @@ const HomePage: FC = () => {
     <div className={styles.Homepage}>
       <Sale />
       <div className={styles.Filters}>
-        <Categories />
-        <Sort />
+        <Categories onCategoryChange={onCategoryChange} category={category} />
+        <Sort sortType={sort} />
       </div>
       {status === 'error' ? (
         <ErrorHome />
