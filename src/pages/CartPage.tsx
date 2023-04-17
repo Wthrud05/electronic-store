@@ -1,7 +1,10 @@
 import React, { FC } from 'react'
+import { useAuth } from '../hooks/useAuth'
 
 const CartPage: FC = () => {
-  return <div>CartPage</div>
+  const { isAuth } = useAuth()
+
+  return <div>{isAuth ? <h1>CartPage</h1> : <h1>You are not authorized</h1>}</div>
 }
 
 export default CartPage

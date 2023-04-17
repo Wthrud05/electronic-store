@@ -14,10 +14,10 @@ const filtersSlice = createSlice({
     setSortType: (state, action: PayloadAction<string>) => {
       state.sort = action.payload
     },
-    setCategory: (state, action) => {
+    setCategory: (state, action: PayloadAction<string>) => {
       state.category = action.payload
     },
-    setSearch: (state, action) => {
+    setSearch: (state, action: PayloadAction<string>) => {
       state.search = action.payload
     },
   },
