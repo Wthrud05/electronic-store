@@ -7,8 +7,12 @@ import { setUser } from '../../redux/auth/slice'
 import axios from 'axios'
 
 type User = {
-  email: string
-  userName: string
+  uData: {
+    email: string
+    id: string
+    name: string
+    token: string
+  }
 }
 
 const Login = () => {
@@ -18,15 +22,17 @@ const Login = () => {
   const handleLogin = (name: string, email: string, password: string) => {
     const auth = getAuth()
 
-    const getUserName = async (
-      url = 'https://electronic-store-63ba3-default-rtdb.europe-west1.firebasedatabase.app/users.json',
-    ) => {
-      const res = await fetch(url).then((data) => data.json())
-      const users: User[] = Object.values(res)
-      const targetUser = users.find((user) => user.email === email)
+    const getUserName = async () => {
+      const { data } = await axios.get<User[]>(
+        'https://electronic-store-63ba3-default-rtdb.europe-west1.firebasedatabase.app/users.json',
+      )
+
+      const users: User[] = Object.values(data)
+
+      const targetUser = users.find((user) => user.uData.email === email)
 
       if (targetUser) {
-        name = targetUser.userName
+        name = targetUser.uData.name
       }
     }
 
@@ -51,7 +57,7 @@ const Login = () => {
       .catch(() => alert('User was not found!'))
   }
 
-  return <Form title={'Sing in'} handleClick={handleLogin} />
+  return <Form title={'Sign in'} handleClick={handleLogin} />
 }
 
 export default Login

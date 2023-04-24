@@ -1,5 +1,6 @@
-// export enum SortType {
-//   ALPHABET = 'alphabet',
-//   PRICE = 'price',
-//   RATING = 'rating',
-// }
+export type IUser = {
+  name: string
+  email: string
+  token: string
+  id: string
+}

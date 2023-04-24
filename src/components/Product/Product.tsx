@@ -1,9 +1,14 @@
-import React, { FC } from 'react'
+import React, { FC, useEffect } from 'react'
 import styles from './Product.module.scss'
 import Button from '../Button/Button'
 import { Link } from 'react-router-dom'
 import star from '../../assets/images/star.svg'
+import heart from '../../assets/images/heart.svg'
+import redheart from '../../assets/images/red-heart.svg'
 import StarIcon from '../StarIcon/StarIcon'
+import { RootState } from '../../redux/store'
+import { useSelector } from 'react-redux'
+import { Favorite } from '../../redux/user/types'
 
 interface ProductProps {
   id: string
@@ -14,13 +19,27 @@ interface ProductProps {
     black?: string
     white?: string
   }
+  addFav: (product: Favorite) => void
+  removeFav: (id: string) => void
 }
 
-const Product: FC<ProductProps> = ({ id, name, price, rating, images }) => {
+const Product: FC<ProductProps> = ({ id, name, price, rating, images, addFav, removeFav }) => {
   const productRating = [...new Array(rating)].map((_, i) => <StarIcon key={i} src={star} />)
+
+  const favorites = useSelector((state: RootState) => state.user.userFavorites)
+  const favInxs = favorites?.map((fav) => fav?.id)
 
   return (
     <div className={styles.Product}>
+      {favInxs?.includes(id) ? (
+        <button onClick={() => removeFav(id)} className={styles.Like}>
+          <img src={redheart} alt="like" />
+        </button>
+      ) : (
+        <button onClick={() => addFav({ id, name, price, images })} className={styles.Like}>
+          <img src={heart} alt="like" />
+        </button>
+      )}
       <img src={images.black ? images.black : images.white} alt="product image" />
 
       <div className={styles.ProductInfo}>
@@ -39,3 +58,6 @@ const Product: FC<ProductProps> = ({ id, name, price, rating, images }) => {
 }
 
 export default Product
+function posthData(arg0: string, arg1: { favs: any[] }) {
+  throw new Error('Function not implemented.')
+}

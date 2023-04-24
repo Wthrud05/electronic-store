@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { createSlice, PayloadAction, createAsyncThunk } from '@reduxjs/toolkit'
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import { IProduct, ProductState, Status } from './types'
 import { sortByParams } from '../../helpers'
 
@@ -15,7 +15,7 @@ export type SortParams = {
 }
 
 export const fetchProducts = createAsyncThunk<IProduct[], SortParams>(
-  'products/products/fetchProducts',
+  'products/fetchProducts',
   async (params) => {
     const { sort = 'default', category = 'headphones', search = '' } = params
 
@@ -39,7 +39,7 @@ export const prodcutsSlice = createSlice({
         state.products = action.payload
         state.status = Status.SUCESS
       }),
-      builder.addCase(fetchProducts.rejected, (state, action) => {
+      builder.addCase(fetchProducts.rejected, (state) => {
         state.products = []
         state.status = Status.ERROR
       })
