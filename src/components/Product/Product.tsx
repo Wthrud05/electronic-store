@@ -6,7 +6,7 @@ import star from '../../assets/images/star.svg'
 import heart from '../../assets/images/heart.svg'
 import redheart from '../../assets/images/red-heart.svg'
 import StarIcon from '../StarIcon/StarIcon'
-import { RootState } from '../../redux/store'
+import { RootState, useAppDispatch } from '../../redux/store'
 import { useSelector } from 'react-redux'
 import { Favorite } from '../../redux/user/types'
 
@@ -24,10 +24,12 @@ interface ProductProps {
 }
 
 const Product: FC<ProductProps> = ({ id, name, price, rating, images, addFav, removeFav }) => {
+  const dispatch = useAppDispatch()
+
   const productRating = [...new Array(rating)].map((_, i) => <StarIcon key={i} src={star} />)
 
-  const favorites = useSelector((state: RootState) => state.user.userFavorites)
-  const favInxs = favorites?.map((fav) => fav?.id)
+  const favorites = useSelector((state: RootState) => state.userData.favorites)
+  const favInxs = favorites?.map((fav) => fav.id)
 
   return (
     <div className={styles.Product}>

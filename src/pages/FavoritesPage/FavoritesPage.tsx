@@ -5,39 +5,60 @@ import styles from './FavoritesPage.module.scss'
 import icon from '../../assets/images/heart-green.svg'
 import FavoriteItem from '../../components/FavoriteItem/FavoriteItem'
 import FavoritePageLoader from '../../components/Skeleton/FavoritePageLoader'
-import { setFavorites } from '../../redux/user/slice'
 import { RootState, useAppDispatch } from '../../redux/store'
 import { useSelector } from 'react-redux'
+import { setFavorites, setUserData } from '../../redux/userData/slice'
+import { fetchUserData } from '../../redux/user/slice'
+import axios from 'axios'
 
 const FavoritesPage: FC = () => {
   const dispatch = useAppDispatch()
-  const favorites = useSelector((state: RootState) => state.user.userFavorites)
+  const user = useSelector((state: RootState) => state.currentUser.currentUser)
+  const userData = useSelector((state: RootState) => state.userData.data)
 
+  const userLocal = JSON.parse(localStorage.getItem('user') || '{}')
+  const uemail: string = userLocal.email
+
+  const [favors, setFavors] = useState<Favorite[]>([])
   const [isLoading, setIsLoading] = useState<boolean>(false)
 
-  useEffect(() => {
+  const loadData = async () => {
     setIsLoading(true)
-
-    const currentUser = JSON.parse(localStorage.getItem('currentUser') || '{}')
-
-    const getFavs = async () => {
-      const res = await fetch(
-        `https://electronic-store-63ba3-default-rtdb.europe-west1.firebasedatabase.app/users/${currentUser.key}/uFavorites.json`,
-      )
-      const data = await res.json()
-
-      if (data !== null) {
-        dispatch(setFavorites(data))
-      }
-      setIsLoading(false)
+    if (!userData) {
+      return
     }
 
-    getFavs()
+    if (userData) {
+      const key = userData.key
+      const res = await axios.get<Favorite[]>(
+        `https://electronic-store-63ba3-default-rtdb.europe-west1.firebasedatabase.app/users/${key}/uFavorites.json`,
+      )
+      setFavors(res.data)
+      dispatch(setFavorites(res.data))
+    }
+    setIsLoading(false)
+  }
+
+  useEffect(() => {
+    if (uemail) {
+      dispatch(fetchUserData(uemail))
+    }
   }, [])
 
-  const loaders = new Array(5).map((_, i) => <FavoritePageLoader key={i} />)
+  useEffect(() => {
+    let data
 
-  console.log(favorites)
+    for (let u in user) {
+      data = { email: user[u].uData.email, name: user[u].uData.name, key: u }
+    }
+    dispatch(setUserData(data))
+  }, [user])
+
+  useEffect(() => {
+    loadData()
+  }, [userData])
+
+  const loaders = [...new Array(5)].map((_, i) => <FavoritePageLoader key={i} />)
 
   return (
     <div className={styles.FavoritesPage}>
@@ -47,10 +68,10 @@ const FavoritesPage: FC = () => {
         <Link to={'/profile'}>Back</Link>
       </div>
       {isLoading ? (
-        loaders
+        <div className={styles.Loaders}>{loaders}</div>
       ) : (
         <ul>
-          {favorites?.map((fav) => (
+          {favors?.map((fav) => (
             <FavoriteItem key={fav.name} {...fav} />
           ))}
         </ul>

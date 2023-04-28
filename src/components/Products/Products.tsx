@@ -1,13 +1,18 @@
-import React, { FC, useEffect, useRef } from 'react'
+import React, { FC, useEffect, useState } from 'react'
 import styles from './Products.module.scss'
+import okey from '../../assets/images/okey.svg'
+import error from '../../assets/images/error.svg'
+
 import Product from '../Product/Product'
+import Modal from '../Modal/Modal'
+
 import { IProduct } from '../../redux/products/types'
 import { useSelector } from 'react-redux'
 import { RootState, useAppDispatch } from '../../redux/store'
 import { putData } from '../../helpers'
-import { setFavorite, removeFavorite } from '../../redux/user/slice'
 import { Favorite } from '../../redux/user/types'
-import axios from 'axios'
+import { useAuth } from '../../hooks/useAuth'
+import { addFavorite, removeFavorite } from '../../redux/userData/slice'
 
 interface ProductsProps {
   products: IProduct[]
@@ -15,48 +20,84 @@ interface ProductsProps {
 
 const Products: FC<ProductsProps> = ({ products }) => {
   const dispatch = useAppDispatch()
-  const favorites = useSelector((state: RootState) => state.user.userFavorites)
+  const favorites = useSelector((state: RootState) => state.userData.favorites)
+  const userData = useSelector((state: RootState) => state.userData.data)
 
-  const favInxs = favorites?.map((fav) => fav?.id)
-  const userKey = useSelector((state: RootState) => state.user.data.key)
+  const { isAuth } = useAuth()
+
+  const [isModal, setIsModal] = useState<boolean>(false)
+  const [modalText, setModalText] = useState<string>('')
+  const [modalLink, setModalLink] = useState<string>('')
+  const [scrollProp, setScrollProp] = useState<number>(0)
+  const [color, setColor] = useState<string>('')
+  const [image, setImage] = useState<string>('')
 
   const updateFavorites = () => {
-    const data = Object.assign({}, favorites)
-
-    const url = `https://electronic-store-63ba3-default-rtdb.europe-west1.firebasedatabase.app/users/${userKey}/uFavorites.json`
-
-    if (JSON.stringify(data) !== '{}') {
-      putData(url, data)
-    }
-
-    if (JSON.stringify(data) === '{}') {
-      axios.delete(url)
+    if (userData) {
+      const key = userData.key
+      putData(
+        `https://electronic-store-63ba3-default-rtdb.europe-west1.firebasedatabase.app/users/${key}/uFavorites.json`,
+        favorites,
+      )
     }
   }
 
   const addToFavoriteHandler = (product: Favorite) => {
-    if (userKey) {
-      favInxs?.includes(product.id) ? null : dispatch(setFavorite(product))
+    if (isAuth) {
+      dispatch(addFavorite(product))
+      setIsModal(true)
+      setModalText('Added to favorites!')
+      setModalLink('/profile/favorites')
+      setImage(okey)
+
+      setTimeout(() => {
+        setIsModal(false)
+        setModalText('')
+        setModalLink('')
+        setImage('')
+      }, 3000)
     } else {
-      alert('You are not authorized!')
+      setIsModal(true)
+      setModalText('You are not authorized!')
+      setColor('red')
+      setImage(error)
+
+      setTimeout(() => {
+        setIsModal(false)
+        setModalText('')
+        setColor('')
+        setImage('')
+      }, 3000)
     }
   }
 
   const removeFromFavoriteHandler = (id: string) => {
-    if (userKey) {
-      favInxs?.includes(id) ? dispatch(removeFavorite(id)) : null
-    } else {
-      alert('You are not authorized!')
-    }
+    dispatch(removeFavorite(id))
   }
 
   useEffect(() => {
     updateFavorites()
   }, [favorites])
 
+  const onScroll = () => setScrollProp(window.scrollY)
+
+  useEffect(() => {
+    window.addEventListener('scroll', () => {
+      onScroll()
+    })
+  }, [])
+
   return (
     <div className={styles.Products}>
       <h1>All products</h1>
+      <Modal
+        image={image}
+        scrollProp={scrollProp}
+        title={modalText}
+        isOpen={isModal}
+        link={modalLink}
+        color={color}
+      />
       <div className={styles.ProductsContent}>
         {products.map((product) => (
           <Product
