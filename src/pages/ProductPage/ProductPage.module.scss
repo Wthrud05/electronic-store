@@ -1,0 +1,160 @@
+@import '../../styles/variables';
+
+.Product {
+  position: relative;
+  display: flex;
+  margin-top: 40px;
+
+  &Back {
+    position: absolute;
+    top: 0;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100px;
+    height: 30px;
+    border: 2px solid #006543;
+    border-radius: 15px;
+    margin-bottom: 15px;
+    transition: all 0.2s ease-in;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    background-color: transparent;
+
+    &:hover {
+      background-color: $green;
+      color: $white;
+    }
+  }
+
+  &Img {
+    background-color: $white-pink;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 15px;
+
+    img {
+      width: 550px;
+      height: 500px;
+    }
+  }
+
+  &Info {
+    margin-left: 50px;
+
+    h1 {
+      font-size: 40px;
+      margin-bottom: 10px;
+    }
+
+    p {
+      color: $grey;
+      margin-bottom: 10px;
+      font-size: 24px;
+    }
+  }
+
+  &Rating {
+    display: flex;
+    padding-bottom: 20px;
+    border-bottom: 1px solid $grey;
+  }
+
+  &Price {
+    padding: 20px 0;
+    border-bottom: 1px solid $grey;
+    font-size: 30px;
+  }
+
+  &Colors {
+    padding: 20px 0;
+    border-bottom: 1px solid $grey;
+
+    span {
+      font-size: 20px;
+      color: $grey;
+    }
+
+    .ProductColorsWrapper {
+      display: flex;
+      margin-top: 10px;
+
+      div {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        border: 3px solid $green;
+        margin-right: 30px;
+        cursor: pointer;
+
+        &:last-child {
+          margin: 0;
+        }
+      }
+    }
+  }
+
+  &Characteristics {
+    padding: 20px 0;
+    border-bottom: 1px solid $grey;
+    margin-bottom: 20px;
+
+    span {
+      font-size: 20px;
+      color: $grey;
+    }
+
+    ul {
+      margin-top: 10px;
+
+      li {
+        margin-top: 10px;
+      }
+    }
+  }
+
+  &Btn {
+    button {
+      width: 180px;
+      height: 50px;
+      margin-right: 40px;
+      cursor: pointer;
+      border: 2px solid transparent;
+      border-radius: 30px;
+      outline: none;
+      font-size: 18px;
+      font-weight: 600;
+
+      &:last-child {
+        margin: 0;
+      }
+    }
+
+    .ProductBtnsBuy {
+      background-color: $green;
+      color: $white;
+      transition: all .2s ease;
+
+      &:hover {
+        background-color: transparent;
+        color: #000;
+        border-color: $green;
+      }
+    }
+
+    .ProductBtnsFav {
+      border-color: $green;
+      background: transparent;
+
+      transition: all .2s ease-in;
+
+      &:hover {
+        background-color: $green;
+        color: $white;
+      }
+    }
+  }
+}

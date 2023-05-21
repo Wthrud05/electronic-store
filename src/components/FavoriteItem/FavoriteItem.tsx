@@ -3,7 +3,9 @@ import styles from './FavoriteItem.module.scss'
 import Button from '../Button/Button'
 import redheart from '../../assets/images/red-heart.svg'
 import { removeFavorite } from '../../redux/userData/slice'
-import { useAppDispatch } from '../../redux/store'
+import { RootState, useAppDispatch } from '../../redux/store'
+import { updateFavorites } from '../../helpers'
+import { useSelector } from 'react-redux'
 
 interface FavoriteItemProps {
   id: string
@@ -13,19 +15,20 @@ interface FavoriteItemProps {
     black?: string
     white?: string
   }
+  removeFromFavorite: (id: string) => void
 }
 
-const FavoriteItem: FC<FavoriteItemProps> = ({ id, name, price, images }) => {
+const FavoriteItem: FC<FavoriteItemProps> = ({ id, name, price, images, removeFromFavorite }) => {
   const dispatch = useAppDispatch()
 
-  const removeFromFavoriteHandler = (id: string) => {
-    dispatch(removeFavorite(id))
-  }
+  // const removeFromFavoriteHandler = (id: string) => {
+  //   dispatch(removeFavorite(id))
+  // }
 
   return (
     <div className={styles.FavoriteItem}>
       <div className={styles.FavoriteItemImage}>
-        <button onClick={() => removeFromFavoriteHandler(id)} className={styles.Like}>
+        <button onClick={() => removeFromFavorite(id)} className={styles.Like}>
           <img src={redheart} alt="like" />
         </button>
         <img src={images.black ? images.black : images.white} alt={'favorite item ' + id} />

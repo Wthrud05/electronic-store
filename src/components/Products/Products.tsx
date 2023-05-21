@@ -9,7 +9,7 @@ import Modal from '../Modal/Modal'
 import { IProduct } from '../../redux/products/types'
 import { useSelector } from 'react-redux'
 import { RootState, useAppDispatch } from '../../redux/store'
-import { putData } from '../../helpers'
+import { putData, updateFavorites } from '../../helpers'
 import { Favorite } from '../../redux/user/types'
 import { useAuth } from '../../hooks/useAuth'
 import { addFavorite, removeFavorite } from '../../redux/userData/slice'
@@ -31,16 +31,6 @@ const Products: FC<ProductsProps> = ({ products }) => {
   const [scrollProp, setScrollProp] = useState<number>(0)
   const [color, setColor] = useState<string>('')
   const [image, setImage] = useState<string>('')
-
-  const updateFavorites = () => {
-    if (userData) {
-      const key = userData.key
-      putData(
-        `https://electronic-store-63ba3-default-rtdb.europe-west1.firebasedatabase.app/users/${key}/uFavorites.json`,
-        favorites,
-      )
-    }
-  }
 
   const addToFavoriteHandler = (product: Favorite) => {
     if (isAuth) {
@@ -76,7 +66,7 @@ const Products: FC<ProductsProps> = ({ products }) => {
   }
 
   useEffect(() => {
-    updateFavorites()
+    updateFavorites(userData, favorites)
   }, [favorites])
 
   const onScroll = () => setScrollProp(window.scrollY)

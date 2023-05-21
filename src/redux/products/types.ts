@@ -8,16 +8,19 @@ export type IProduct = {
     black?: string
     white?: string
   }
-  color: string[]
-  characterisrics: {
-    ch1: string
-    ch2: string
-    ch3: string
-  }
+  colors: string[]
+  characteristics: Characteristic[]
   sort?: string
+  param?: string
+  choosenColor?: string
 }
 
-export interface ProductState {
+type Characteristic = {
+  name: string
+  value: string
+}
+
+export interface ProductsState {
   products: IProduct[]
   status: Status
 }

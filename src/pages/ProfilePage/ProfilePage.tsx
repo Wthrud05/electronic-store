@@ -10,6 +10,8 @@ import favorites from '../../assets/images/heart-green.svg'
 import { useSelector } from 'react-redux'
 import { fetchUserData, setCurrUser } from '../../redux/user/slice'
 import { setUserData, setFavorites } from '../../redux/userData/slice'
+import profile from '../../assets/images/profile.svg'
+import PageHeader from '../../components/PageHeader/PageHeader'
 
 const ProfilePage: FC = () => {
   const navigate = useNavigate()
@@ -52,36 +54,15 @@ const ProfilePage: FC = () => {
       favorites = user[u].uFavorites
     }
     dispatch(setUserData(data))
-    dispatch(setFavorites(favorites))
+
+    if (favorites) {
+      dispatch(setFavorites(favorites))
+    }
   }, [user])
-
-  //   if (JSON.stringify(isAuth) !== '{}') {
-  //     const user: IUser = JSON.parse(localStorage.getItem('user') || '{}')
-  //     const { name, email, token, id } = user
-  //     dispatch(setUser({ name, email, token, id }))
-  //   }
-  // }, [isAuth])
-
-  // useEffect(() => {
-  //   try {
-  //     const loadUser = async () => {
-  //       const useremail = await useLocalStorage()
-  //       await getCurrentUser(useremail)
-
-  //       const currentUser = await JSON.parse(localStorage.getItem('currentUser') || '{}')
-
-  //       if (JSON.parse(localStorage.getItem('currentUser') || '{}') !== '{}') {
-  //         dispatch(setCurrentUser(currentUser))
-  //       } else throw new Error('Error to load user data')
-  //     }
-  //     loadUser()
-  //   } catch (error: any) {
-  //     console.log(error.message)
-  //   }
-  // }, [isAuth])
 
   return (
     <div className={styles.Profile}>
+      <PageHeader name="Profile" path={'/'} icon={profile} />
       <div className={styles.Profile_Img}>A</div>
       <div className={styles.Profile_Info}>
         <h2>{name}</h2>

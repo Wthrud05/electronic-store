@@ -1,4 +1,4 @@
-import { Favorite } from '../user/types'
+import { CartItem, Favorite } from '../user/types'
 
 export interface UserDataState {
   data: {
@@ -7,6 +7,6 @@ export interface UserDataState {
     name: string
   }
   favorites: Favorite[]
-  cart?: []
+  cart: CartItem[]
   orders?: []
 }

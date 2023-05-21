@@ -1,16 +1,3 @@
-// export type UserData = {
-//   key: string
-//   email: string
-//   name: string
-// }
-
-// export interface CurrentUserState {
-//   data: UserData
-//   userCart?: []
-//   userOrders?: []
-//   userFavorites?: Favorite[]
-// }
-
 export type Favorite = {
   id: string
   name: string
@@ -19,6 +6,14 @@ export type Favorite = {
     black?: string
     white?: string
   }
+}
+
+export type CartItem = Favorite & {
+  characteristics: {
+    mark: string
+  }
+  type: string
+  count: number
 }
 
 export type User = {

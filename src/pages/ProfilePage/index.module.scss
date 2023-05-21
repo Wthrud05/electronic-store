@@ -5,6 +5,48 @@
   flex-direction: column;
   align-items: center;
 
+  // &Header  {
+  //   position: relative;
+  //   display: flex;
+  //   align-items: center;
+  //   border-bottom: 1px solid $grey;
+  //   width: 100%;
+  //   padding: 10px 0;
+  //   margin-bottom: 30px;
+
+  //   .ProfileHeaderTitle {
+  //     font-size: 28px;
+  //     margin: 0;
+  //     margin-left: 10px;
+  //   }
+
+  //   a {
+  //     position: absolute;
+  //     bottom: 0;
+  //     right: 0;
+  
+  //     display: flex;
+  //     justify-content: center;
+  //     align-items: center;
+  
+  //     width: 100px;
+  //     height: 30px;
+  
+  //     border: 2px solid $green;
+  //     border-radius: 15px;
+  //     margin-bottom: 15px;
+  //     transition: all .2s ease-in;
+  
+  //     font-size: 16px;
+  //     font-weight: 500;
+  
+  //     &:hover {
+  //       background: $green;
+  //       color: $white;
+  //     }
+  //   }
+  // }
+
   h2 {
     margin: 20px;
     font-size: 32px;
@@ -55,21 +97,7 @@
         transition: all .2s ease-in;
       }
 
-      &::after {
-        position: absolute;
-        content: '';
-        bottom: -15px;
-        left: 50%;
-
-        opacity: 0;
-
-        transform: translateX(-50%);
-        transition: all .2s ease-in;
-        width: 70%;
-        height: 5px;
-        border-radius: 5px;
-        background: $green;
-      }
+      
 
       &:hover {
         span {

@@ -5,11 +5,13 @@ import filterReducer from './filters/slice'
 import authReducer from './auth/slice'
 import userReducer from './user/slice'
 import userDataReducer from './userData/slice'
+import productReducer from './product/slice'
 import { useSelector } from 'react-redux'
 
 const store = configureStore({
   reducer: {
     products: productsReducer,
+    product: productReducer,
     filters: filterReducer,
     auth: authReducer,
     currentUser: userReducer,

@@ -1,9 +1,9 @@
 import axios from 'axios'
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
-import { IProduct, ProductState, Status } from './types'
+import { IProduct, ProductsState, Status } from './types'
 import { sortByParams } from '../../helpers'
 
-const initialState: ProductState = {
+const initialState: ProductsState = {
   products: [],
   status: Status.LOADING,
 }

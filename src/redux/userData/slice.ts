@@ -12,23 +12,6 @@ const initialState: UserDataState = {
   orders: [],
 }
 
-// export const updateUserData = createAsyncThunk<Favorite[], any>(
-//   'userData/updateUserData',
-//   async (data, thunkApi) => {
-//     try {
-//       console.log(thunkApi)
-
-//       const response = await axios.put<Favorite[], any>(
-//         `https://electronic-store-63ba3-default-rtdb.europe-west1.firebasedatabase.app/users/-NTPQHlXChuNMzsN_-3n/uFavorites.json`,
-//         data,
-//       )
-//       return response
-//     } catch (err) {
-//       console.log(err)
-//     }
-//   },
-// )
-
 const userDataSlice = createSlice({
   name: 'userData',
   initialState,
@@ -45,6 +28,7 @@ const userDataSlice = createSlice({
     removeFavorite: (state, action) => {
       state.favorites = state.favorites.filter((fav) => fav.id !== action.payload)
     },
+    setCartItem: (state, action) => (state.cart = action.payload),
   },
 })
 
