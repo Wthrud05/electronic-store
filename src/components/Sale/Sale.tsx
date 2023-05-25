@@ -9,7 +9,7 @@ const Sale = () => {
     <div className={styles.Sale}>
       <div className={styles.SaleLeft}>
         <h1>Get -30% off on selected headphones</h1>
-        <Link to={'/product/1'}>
+        <Link to={'/product/:1'}>
           <Button title="Buy now" />
         </Link>
       </div>

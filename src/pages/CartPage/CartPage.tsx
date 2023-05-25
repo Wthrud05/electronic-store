@@ -12,6 +12,7 @@ import { setCartItems, setUserData } from '../../redux/userData/slice'
 import CartItem from '../../components/CartItem/CartItem'
 import { getTotalPrice, getTotalProducts, updateCartItems } from '../../helpers'
 import CartPageLoader from '../../components/Skeleton/CartPageLoader'
+import { Link } from 'react-router-dom'
 
 const CartPage: FC = () => {
   const [items, setItems] = useState<any[]>([])
@@ -53,6 +54,7 @@ const CartPage: FC = () => {
       dispatch(setCartItems(cartItems))
       setLoading(false)
     }
+    setLoading(false)
   }, [user])
 
   useEffect(() => {

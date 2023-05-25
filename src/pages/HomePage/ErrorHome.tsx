@@ -6,7 +6,7 @@ const Error = () => {
   return (
     <div className={styles.ErrorHome}>
       <h1>An error occurred while loading the page</h1>
-      <img src={errorFace} alt="" />
+      <img src={errorFace} alt="error" />
       <p>Try reloading the page</p>
     </div>
   )

@@ -37,6 +37,9 @@
     }
 
     button {
+      display: flex;
+      justify-content: center;
+      align-items: center;
       background-color: $green;
       border: none;
       outline: none;

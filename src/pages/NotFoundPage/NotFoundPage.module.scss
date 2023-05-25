@@ -1,0 +1,40 @@
+@import '../../styles/variables';
+
+.NotFound {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 30px;
+
+  img {
+    width: 120px;
+    height: 120px;
+    margin-bottom: 50px;
+  }
+
+  h1 {
+    font-size: 32px;
+    margin-bottom: 10px;
+    color: $grey;
+  }
+
+  p {
+    margin-bottom: 20px;
+  }
+
+  a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 15px;
+    height: 40px;
+    background-color: $green;
+    border-radius: 20px;
+    color: $white;
+    transition: opacity .2s ease-in;
+
+    &:hover {
+      opacity: .9;
+    }
+  }
+}
