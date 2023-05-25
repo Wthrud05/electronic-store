@@ -4,11 +4,11 @@
   letter-spacing: 1px;
 }
 
-#root {
+html,body {
   height: 100%;
 }
 
-html,body {
+#root {
   height: 100%;
 }
 
@@ -25,4 +25,7 @@ html,body {
 .content {
   padding: 40px 0;
   flex: 1 0 auto;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
 }

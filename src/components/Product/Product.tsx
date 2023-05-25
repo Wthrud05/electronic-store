@@ -60,6 +60,3 @@ const Product: FC<ProductProps> = ({ id, name, price, rating, images, addFav, re
 }
 
 export default Product
-function posthData(arg0: string, arg1: { favs: any[] }) {
-  throw new Error('Function not implemented.')
-}

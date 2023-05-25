@@ -1,46 +1,58 @@
-import React, { FC, useEffect, useState } from 'react'
+import React, { FC, useEffect, useState, useCallback } from 'react'
 import styles from './ProductPage.module.scss'
 import { useNavigate, useParams } from 'react-router-dom'
 import axios from 'axios'
-import { setProduct } from '../../redux/product/slice'
+import { setChoosenColor, setProduct } from '../../redux/product/slice'
 import { RootState, useAppDispatch } from '../../redux/store'
 import { useSelector } from 'react-redux'
 import star from '../../assets/images/star.svg'
 import StarIcon from '../../components/StarIcon/StarIcon'
-import { IProduct } from '../../redux/products/types'
-import Button from '../../components/Button/Button'
+import { addCartItem } from '../../redux/cart/slice'
+import ProductPageLoader from '../../components/Skeleton/ProductPageLoader'
+import { updateCartItems } from '../../helpers'
+import { setCartItem } from '../../redux/userData/slice'
 
 const ProductPage: FC = () => {
   const dispatch = useAppDispatch()
+
   const [loading, setLoading] = useState<boolean>(false)
   const [image, setImage] = useState<string | undefined>('')
+  const [color, setColor] = useState<string | undefined>('')
 
   const navigate = useNavigate()
   const { id } = useParams()
   const pId = id?.slice(1)
 
   const product = useSelector((state: RootState) => state.product.product)
+  const userData = useSelector((state: RootState) => state.userData.data)
+  const cartItems = useSelector((state: RootState) => state.userData.cart)
+
+  const loadProductData = async () => {
+    setLoading(true)
+    const { data } = await axios.get(
+      `https://electronic-store-63ba3-default-rtdb.europe-west1.firebasedatabase.app/products/${pId}.json`,
+    )
+
+    dispatch(setProduct(data))
+    data.colors.includes('black')
+      ? dispatch(setChoosenColor('black'))
+      : dispatch(setChoosenColor('white'))
+    setLoading(false)
+  }
 
   useEffect(() => {
-    setLoading(true)
-    axios
-      .get(
-        `https://electronic-store-63ba3-default-rtdb.europe-west1.firebasedatabase.app/products/${pId}.json`,
-      )
-      .then((res) => {
-        dispatch(setProduct(res.data))
-        setLoading(false)
-      })
+    loadProductData()
   }, [])
 
   useEffect(() => {
-    const color = product.images
+    const image = product.images
 
-    if (color.black) {
-      setImage(product.images.black)
-    } else {
-      setImage(product.images.white)
-    }
+    product.choosenColor
+      ? // @ts-ignore
+        setImage(product.images[product.choosenColor])
+      : image.black
+      ? setImage(product.images.black)
+      : setImage(product.images.white)
   }, [product])
 
   const productRating = [...new Array(product.rating)].map((_, i) => (
@@ -50,16 +62,31 @@ const ProductPage: FC = () => {
   const chooseColorHander = (color: string) => {
     // @ts-ignore
     setImage(product.images[color])
+    setColor(color)
+    dispatch(setChoosenColor(color))
   }
 
   const back = () => {
     navigate('/')
   }
 
+  const addToCart = () => {
+    console.log()
+
+    dispatch(setCartItem(product))
+    setTimeout(() => {
+      navigate('/cart')
+    }, 100)
+  }
+
+  useEffect(() => {
+    updateCartItems(userData, cartItems)
+  }, [cartItems])
+
   return (
     <>
       {loading ? (
-        <h1>LOADING</h1>
+        <ProductPageLoader />
       ) : (
         <div className={styles.Product}>
           <a onClick={back} className={styles.ProductBack}>
@@ -98,7 +125,9 @@ const ProductPage: FC = () => {
               </ul>
             </div>
             <div className={styles.ProductBtn}>
-              <button className={styles.ProductBtnsBuy}>Buy now</button>
+              <button onClick={() => addToCart()} className={styles.ProductBtnsBuy}>
+                Buy now
+              </button>
             </div>
           </div>
         </div>

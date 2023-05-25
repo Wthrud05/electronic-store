@@ -13,6 +13,7 @@ export type IProduct = {
   sort?: string
   param?: string
   choosenColor?: string
+  count: number
 }
 
 type Characteristic = {

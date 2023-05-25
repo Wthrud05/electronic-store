@@ -1,3 +1,5 @@
+import { IProduct } from '../products/types'
+
 export type Favorite = {
   id: string
   name: string
@@ -8,14 +10,6 @@ export type Favorite = {
   }
 }
 
-export type CartItem = Favorite & {
-  characteristics: {
-    mark: string
-  }
-  type: string
-  count: number
-}
-
 export type User = {
   uData: {
     email: string
@@ -24,6 +18,7 @@ export type User = {
     token: string
   }
   uFavorites: Favorite[]
+  uCart: IProduct[]
 }
 
 export interface UserState {

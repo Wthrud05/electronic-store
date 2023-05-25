@@ -6,6 +6,7 @@ import authReducer from './auth/slice'
 import userReducer from './user/slice'
 import userDataReducer from './userData/slice'
 import productReducer from './product/slice'
+import cartReducer from './cart/slice'
 import { useSelector } from 'react-redux'
 
 const store = configureStore({
@@ -13,6 +14,7 @@ const store = configureStore({
     products: productsReducer,
     product: productReducer,
     filters: filterReducer,
+    cart: cartReducer,
     auth: authReducer,
     currentUser: userReducer,
     userData: userDataReducer,

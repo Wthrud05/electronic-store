@@ -1,0 +1,56 @@
+@import '../../styles/variables';
+
+.Cart {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+
+  ul {
+    width: 90%;
+    margin: 0 auto;
+    flex-grow: 1;
+  }
+
+  &Total {
+    width: 90%;
+    margin: 0 auto;
+    background-color: $white-pink;
+    border-radius: 10px;
+    padding: 20px;
+    margin-top: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    p {
+      margin-bottom: 15px;
+      font-weight: 500;
+
+      span {
+        font-weight: 700;
+      }
+
+      &:last-child {
+        margin: 0;
+      }
+    }
+
+    button {
+      background-color: $green;
+      border: none;
+      outline: none;
+      border-radius: 30px;
+      color: $white;
+      font-size: 18px;
+      font-weight: 600;
+      width: 170px;
+      height: 45px;
+      cursor: pointer;
+      transition: opacity .2s ease-in;
+
+      &:hover {
+        opacity: .9;
+      }
+    }
+  }
+}

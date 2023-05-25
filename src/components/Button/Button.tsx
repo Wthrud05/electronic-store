@@ -6,7 +6,6 @@ interface ButtonProps {
   width?: string
   height?: string
   fontSize?: string
-  onClick?: Function
 }
 
 const Button: FC<ButtonProps> = ({

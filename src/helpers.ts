@@ -52,3 +52,21 @@ export const updateFavorites = (userdata: any, favorites: Favorite[]) => {
     )
   }
 }
+
+export const updateCartItems = (userData: any, data: any) => {
+  if (userData) {
+    const key = userData.key
+    putData(
+      `https://electronic-store-63ba3-default-rtdb.europe-west1.firebasedatabase.app/users/${key}/uCart.json`,
+      data,
+    )
+  }
+}
+
+export const getTotalPrice = (arr: IProduct[]) => {
+  return arr.reduce((sum, item) => (sum += item.price * item.count), 0)
+}
+
+export const getTotalProducts = (arr: IProduct[]) => {
+  return arr.reduce((count, item) => (count += item.count), 0)
+}

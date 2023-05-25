@@ -12,7 +12,6 @@ import ErrorHome from './ErrorHome'
 import { setCategory } from '../../redux/filters/slice'
 import { fetchUserData } from '../../redux/user/slice'
 import { setFavorites, setUserData } from '../../redux/userData/slice'
-import { updateFavorites } from '../../helpers'
 
 const HomePage: FC = () => {
   const dispatch = useAppDispatch()
@@ -23,7 +22,6 @@ const HomePage: FC = () => {
   const email: string = userLocal.email
 
   const user = useSelector((state: RootState) => state.currentUser.currentUser)
-  const favorites = useSelector((state: RootState) => state.userData.favorites)
 
   const userData = useSelector((state: RootState) => state.userData.data)
 
@@ -36,22 +34,20 @@ const HomePage: FC = () => {
   }, [])
 
   useEffect(() => {
-    if (favorites.length) {
+    let data
+    let favorites
+
+    for (let u in user) {
+      console.log(user[u].uData)
+      data = { email: user[u].uData.email, name: user[u].uData.name, key: u }
+      favorites = user[u].uFavorites
+    }
+
+    dispatch(setUserData(data))
+    if (favorites) {
       dispatch(setFavorites(favorites))
     } else {
-      let data
-      let favorites
-
-      for (let u in user) {
-        data = { email: user[u].uData.email, name: user[u].uData.name, key: u }
-
-        favorites = user[u].uFavorites
-      }
-      dispatch(setUserData(data))
-
-      if (favorites) {
-        dispatch(setFavorites(favorites))
-      }
+      dispatch(setFavorites([]))
     }
   }, [user])
 

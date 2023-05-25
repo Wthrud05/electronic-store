@@ -55,9 +55,9 @@ const ProfilePage: FC = () => {
     }
     dispatch(setUserData(data))
 
-    if (favorites) {
-      dispatch(setFavorites(favorites))
-    }
+    // if (favorites) {
+    //   dispatch(setFavorites(favorites))
+    // }
   }, [user])
 
   return (
