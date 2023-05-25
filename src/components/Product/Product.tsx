@@ -51,8 +51,7 @@ const Product: FC<ProductProps> = ({ id, name, price, rating, images, addFav, re
         </div>
         <div className={styles.Rating}>{productRating}</div>
         <div className={styles.Bot}>
-          <Button title="Add to cart" width="110px" height="30px" fontSize="13px" />
-          <Link to={`/product/:${id}`}>Details</Link>
+          <Link to={`/product/:${id}`}>Add to cart</Link>
         </div>
       </div>
     </div>

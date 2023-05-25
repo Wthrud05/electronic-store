@@ -1,5 +1,6 @@
 import React, { FC, useEffect, useState } from 'react'
 import styles from './CartPage.module.scss'
+import emptyCart from '../../assets/images/empty-cart.svg'
 import { useAuth } from '../../hooks/useAuth'
 import PageHeader from '../../components/PageHeader/PageHeader'
 import cart from '../../assets/images/cart.svg'
@@ -7,18 +8,21 @@ import { useSelector } from 'react-redux'
 import { RootState } from '../../redux/store'
 import { useAppDispatch } from '../../redux/store'
 import { fetchUserData } from '../../redux/user/slice'
-import { setCartItems, setFavorites, setUserData } from '../../redux/userData/slice'
+import { setCartItems, setUserData } from '../../redux/userData/slice'
 import CartItem from '../../components/CartItem/CartItem'
-import { getTotalPrice, getTotalProducts } from '../../helpers'
-import Button from '../../components/Button/Button'
+import { getTotalPrice, getTotalProducts, updateCartItems } from '../../helpers'
+import CartPageLoader from '../../components/Skeleton/CartPageLoader'
 
 const CartPage: FC = () => {
   const [items, setItems] = useState<any[]>([])
+  const [loading, setLoading] = useState<boolean>(false)
   const dispatch = useAppDispatch()
 
   const user = useSelector((state: RootState) => state.currentUser.currentUser)
 
   const userCart = useSelector((state: RootState) => state.userData.cart)
+
+  const userData = useSelector((state: RootState) => state.userData.data)
 
   const totalPrice = getTotalPrice(userCart)
   const totalProducts = getTotalProducts(userCart)
@@ -29,6 +33,7 @@ const CartPage: FC = () => {
   const email: string = userLocal.email
 
   useEffect(() => {
+    setLoading(true)
     if (email) {
       dispatch(fetchUserData(email))
     }
@@ -46,17 +51,13 @@ const CartPage: FC = () => {
 
     if (cartItems) {
       dispatch(setCartItems(cartItems))
+      setLoading(false)
     }
   }, [user])
 
-  if (!items) {
-    return (
-      <div>
-        <PageHeader name="Cart" path="/" icon={cart} />
-        <h1>Корзина пустая</h1>
-      </div>
-    )
-  }
+  useEffect(() => {
+    updateCartItems(userData, userCart)
+  }, [userCart])
 
   return (
     <>
@@ -65,15 +66,30 @@ const CartPage: FC = () => {
       ) : (
         <div className={styles.Cart}>
           <PageHeader name="Cart" path="/" icon={cart} />
-          <ul>
-            {userCart.map((item: any) => {
-              return (
-                <li key={item.name + item.choosenColor}>
-                  <CartItem cartItem={item} />
-                </li>
-              )
-            })}
-          </ul>
+          {loading ? (
+            <CartPageLoader />
+          ) : (
+            <>
+              {userCart.length ? (
+                <ul>
+                  {userCart.map((item: any) => {
+                    return (
+                      <li key={item.name + item.choosenColor}>
+                        <CartItem cartItem={item} />
+                      </li>
+                    )
+                  })}
+                </ul>
+              ) : (
+                <ul className={styles.CartEmpty}>
+                  <h1>
+                    Your cart is <span>Empty!</span>
+                  </h1>
+                  <img src={emptyCart} alt="empty-cart" />
+                </ul>
+              )}
+            </>
+          )}
           <div className={styles.CartTotal}>
             <div>
               <p>

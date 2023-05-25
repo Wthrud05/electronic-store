@@ -71,8 +71,6 @@ const ProductPage: FC = () => {
   }
 
   const addToCart = () => {
-    console.log()
-
     dispatch(setCartItem(product))
     setTimeout(() => {
       navigate('/cart')

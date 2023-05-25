@@ -1,5 +1,4 @@
 import React, { FC, useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
 import { Favorite } from '../../redux/user/types'
 import styles from './FavoritesPage.module.scss'
 import favorite from '../../assets/images/heart-green.svg'
@@ -10,7 +9,7 @@ import { useSelector } from 'react-redux'
 import { removeFavorite, setFavorites, setUserData } from '../../redux/userData/slice'
 import { fetchUserData } from '../../redux/user/slice'
 import axios from 'axios'
-import { putData, updateFavorites } from '../../helpers'
+import { updateFavorites } from '../../helpers'
 import PageHeader from '../../components/PageHeader/PageHeader'
 
 const FavoritesPage: FC = () => {
@@ -23,7 +22,6 @@ const FavoritesPage: FC = () => {
   const userLocal = JSON.parse(localStorage.getItem('user') || '{}')
   const uemail: string = userLocal.email
 
-  const [favors, setFavors] = useState<Favorite[]>([])
   const [isLoading, setIsLoading] = useState<boolean>(false)
 
   const favorites = useSelector((state: RootState) => state.userData.favorites)
@@ -45,7 +43,6 @@ const FavoritesPage: FC = () => {
         return
       }
 
-      setFavors(res.data)
       dispatch(setFavorites(res.data))
     }
     setIsLoading(false)
@@ -77,9 +74,13 @@ const FavoritesPage: FC = () => {
   }, [user])
 
   useEffect(() => {
+    setIsLoading(true)
     updateFavorites(userData, favorites)
-    setFavors(favorites)
+    // setFavors(favorites)
+    setIsLoading(false)
   }, [favorites])
+
+  console.log(favorites)
 
   const removeFromFavroite = (id: string) => {
     dispatch(removeFavorite(id))
@@ -94,7 +95,7 @@ const FavoritesPage: FC = () => {
         <div className={styles.Loaders}>{loaders}</div>
       ) : (
         <ul>
-          {favors?.map((fav) => (
+          {favorites?.map((fav) => (
             <FavoriteItem removeFromFavorite={removeFromFavroite} key={fav.name} {...fav} />
           ))}
         </ul>

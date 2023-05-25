@@ -21,10 +21,6 @@ interface FavoriteItemProps {
 const FavoriteItem: FC<FavoriteItemProps> = ({ id, name, price, images, removeFromFavorite }) => {
   const dispatch = useAppDispatch()
 
-  // const removeFromFavoriteHandler = (id: string) => {
-  //   dispatch(removeFavorite(id))
-  // }
-
   return (
     <div className={styles.FavoriteItem}>
       <div className={styles.FavoriteItemImage}>
@@ -36,7 +32,6 @@ const FavoriteItem: FC<FavoriteItemProps> = ({ id, name, price, images, removeFr
       <div className={styles.FavoriteItemInfo}>
         <span>{price} $</span>
         <p>{name}</p>
-        <Button title="Add to cart" fontSize="12px" width="100px" height="30px" />
       </div>
     </div>
   )

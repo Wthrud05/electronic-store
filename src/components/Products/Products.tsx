@@ -13,6 +13,8 @@ import { updateFavorites } from '../../helpers'
 import { Favorite } from '../../redux/user/types'
 import { useAuth } from '../../hooks/useAuth'
 import { addFavorite, removeFavorite } from '../../redux/userData/slice'
+import { setCartItem } from '../../redux/userData/slice'
+import { setChoosenColor, setProduct } from '../../redux/product/slice'
 
 interface ProductsProps {
   products: IProduct[]
@@ -22,6 +24,7 @@ const Products: FC<ProductsProps> = ({ products }) => {
   const dispatch = useAppDispatch()
   const favorites = useSelector((state: RootState) => state.userData.favorites)
   const userData = useSelector((state: RootState) => state.userData.data)
+  const currentProduct = useSelector((state: RootState) => state.product.product)
 
   const { isAuth } = useAuth()
 

@@ -38,7 +38,6 @@ const HomePage: FC = () => {
     let favorites
 
     for (let u in user) {
-      console.log(user[u].uData)
       data = { email: user[u].uData.email, name: user[u].uData.name, key: u }
       favorites = user[u].uFavorites
     }

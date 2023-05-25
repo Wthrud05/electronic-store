@@ -39,6 +39,16 @@ const userDataSlice = createSlice({
         state.cart.push(action.payload)
       }
     },
+    removeCartItem: (state, action) => {
+      const findItem = state.cart.find((item) => item.id === action.payload)
+
+      if (findItem) {
+        findItem.count > 1 ? findItem.count-- : (findItem.count = 1)
+      }
+    },
+    deleteCartItem: (state, action) => {
+      state.cart = state.cart.filter((item) => item.id !== action.payload.id)
+    },
     setCartItems: (state, action) => {
       state.cart = action.payload
     },
@@ -46,5 +56,13 @@ const userDataSlice = createSlice({
 })
 
 export default userDataSlice.reducer
-export const { setUserData, setFavorites, addFavorite, removeFavorite, setCartItem, setCartItems } =
-  userDataSlice.actions
+export const {
+  setUserData,
+  setFavorites,
+  addFavorite,
+  removeFavorite,
+  setCartItem,
+  setCartItems,
+  removeCartItem,
+  deleteCartItem,
+} = userDataSlice.actions

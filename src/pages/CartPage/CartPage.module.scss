@@ -2,6 +2,7 @@
 
 .Cart {
   display: flex;
+  align-items: center;
   flex-direction: column;
   flex-grow: 1;
 
@@ -51,6 +52,26 @@
       &:hover {
         opacity: .9;
       }
+
+    }
+  }
+
+  &Empty {
+    text-align: center;
+    padding-top: 50px;
+
+    h1 {
+      font-size: 32px;
+      margin-bottom: 50px;
+
+      span {
+        color: $green;
+      }
+    }
+
+    img {
+      height: 100px;
+      width: 100px;
     }
   }
 }
