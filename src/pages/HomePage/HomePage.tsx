@@ -11,7 +11,7 @@ import Products from '../../components/Products/Products'
 import ErrorHome from './ErrorHome'
 import { setCategory } from '../../redux/filters/slice'
 import { fetchUserData } from '../../redux/user/slice'
-import { setFavorites, setUserData } from '../../redux/userData/slice'
+import { setCartItems, setFavorites, setUserData } from '../../redux/userData/slice'
 
 const HomePage: FC = () => {
   const dispatch = useAppDispatch()
@@ -24,6 +24,7 @@ const HomePage: FC = () => {
   const user = useSelector((state: RootState) => state.currentUser.currentUser)
 
   const userData = useSelector((state: RootState) => state.userData.data)
+  const userCart = useSelector((state: RootState) => state.userData.cart)
 
   useEffect(() => {
     dispatch(fetchProducts({ sort, category, search }))
@@ -36,17 +37,24 @@ const HomePage: FC = () => {
   useEffect(() => {
     let data
     let favorites
+    let cart
 
     for (let u in user) {
       data = { email: user[u].uData.email, name: user[u].uData.name, key: u }
       favorites = user[u].uFavorites
+      cart = user[u].uCart
     }
 
     dispatch(setUserData(data))
+
     if (favorites) {
       dispatch(setFavorites(favorites))
     } else {
       dispatch(setFavorites([]))
+    }
+
+    if (cart) {
+      dispatch(setCartItems(cart))
     }
   }, [user])
 

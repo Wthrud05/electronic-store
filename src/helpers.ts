@@ -63,10 +63,68 @@ export const updateCartItems = (userData: any, data: any) => {
   }
 }
 
+export const updateOrders = (userData: any, data: any) => {
+  if (userData) {
+    const key = userData.key
+    putData(
+      `https://electronic-store-63ba3-default-rtdb.europe-west1.firebasedatabase.app/users/${key}/uOrders.json`,
+      data,
+    )
+  }
+}
+
 export const getTotalPrice = (arr: IProduct[]) => {
   return arr.reduce((sum, item) => (sum += item.price * item.count), 0)
 }
 
 export const getTotalProducts = (arr: IProduct[]) => {
   return arr.reduce((count, item) => (count += item.count), 0)
+}
+
+export const validateCardNumber = (str: string) => {
+  for (let i = 0; i < str.length; i++) {
+    if (isNaN(Number(str[i]))) {
+      str = str.slice(0, i)
+    }
+    if (str.length === 4 || str.length === 9 || str.length === 14) {
+      str += ' '
+    }
+  }
+
+  if (str.length > 19) {
+    return str.slice(0, 19)
+  }
+
+  return str
+}
+
+export const validateExpireDate = (str: string) => {
+  for (let i = 0; i < str.length; i++) {
+    if (isNaN(Number(str[i]))) {
+      str = str.slice(0, i)
+    }
+    if (str.length === 2) {
+      str += ' '
+    }
+  }
+
+  if (str.length > 5) {
+    return str.slice(0, 5)
+  }
+
+  return str
+}
+
+export const validateCvv = (str: string) => {
+  for (let i = 0; i < str.length; i++) {
+    if (isNaN(Number(str[i]))) {
+      str = str.slice(0, i)
+    }
+  }
+
+  if (str.length > 3) {
+    return str.slice(0, 3)
+  }
+
+  return str
 }

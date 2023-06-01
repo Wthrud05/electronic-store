@@ -7,6 +7,7 @@ import userReducer from './user/slice'
 import userDataReducer from './userData/slice'
 import productReducer from './product/slice'
 import cartReducer from './cart/slice'
+import paymentReducer from './payment/slice'
 import { useSelector } from 'react-redux'
 
 const store = configureStore({
@@ -15,6 +16,7 @@ const store = configureStore({
     product: productReducer,
     filters: filterReducer,
     cart: cartReducer,
+    payment: paymentReducer,
     auth: authReducer,
     currentUser: userReducer,
     userData: userDataReducer,

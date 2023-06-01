@@ -1,4 +1,5 @@
 import { IProduct } from '../products/types'
+import { Order } from '../userData/types'
 
 export type Favorite = {
   id: string
@@ -19,6 +20,7 @@ export type User = {
   }
   uFavorites: Favorite[]
   uCart: IProduct[]
+  uOrders: Order[]
 }
 
 export interface UserState {

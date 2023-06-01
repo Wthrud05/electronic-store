@@ -13,6 +13,7 @@ import CartItem from '../../components/CartItem/CartItem'
 import { getTotalPrice, getTotalProducts, updateCartItems } from '../../helpers'
 import CartPageLoader from '../../components/Skeleton/CartPageLoader'
 import { Link } from 'react-router-dom'
+import { setProducts, setProductsCount, setTotalPrice } from '../../redux/payment/slice'
 
 const CartPage: FC = () => {
   const [items, setItems] = useState<any[]>([])
@@ -61,6 +62,12 @@ const CartPage: FC = () => {
     updateCartItems(userData, userCart)
   }, [userCart])
 
+  const orderHandler = () => {
+    dispatch(setProducts(userCart))
+    dispatch(setProductsCount(totalProducts))
+    dispatch(setTotalPrice(totalPrice))
+  }
+
   return (
     <>
       {!isAuth ? (
@@ -101,7 +108,9 @@ const CartPage: FC = () => {
                 Products: <span>{totalProducts}</span>
               </p>
             </div>
-            <button>Make an order</button>
+            <Link onClick={orderHandler} to={totalProducts > 0 ? '/payment' : '/cart'}>
+              Make an order
+            </Link>
           </div>
         </div>
       )}

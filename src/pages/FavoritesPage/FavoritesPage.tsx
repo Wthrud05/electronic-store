@@ -76,11 +76,8 @@ const FavoritesPage: FC = () => {
   useEffect(() => {
     setIsLoading(true)
     updateFavorites(userData, favorites)
-    // setFavors(favorites)
     setIsLoading(false)
   }, [favorites])
-
-  console.log(favorites)
 
   const removeFromFavroite = (id: string) => {
     dispatch(removeFavorite(id))

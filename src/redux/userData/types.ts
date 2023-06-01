@@ -1,6 +1,12 @@
 import { IProduct } from '../products/types'
 import { Favorite } from '../user/types'
 
+export type Order = {
+  products: IProduct[]
+  totalPrice: number
+  productsCount: number
+}
+
 export interface UserDataState {
   data: {
     email: string
@@ -9,5 +15,5 @@ export interface UserDataState {
   }
   favorites: Favorite[]
   cart: IProduct[]
-  orders?: []
+  orders: Order[]
 }

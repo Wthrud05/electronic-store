@@ -52,6 +52,12 @@ const userDataSlice = createSlice({
     setCartItems: (state, action) => {
       state.cart = action.payload
     },
+    setOrder: (state, action) => {
+      state.orders.push(action.payload)
+    },
+    setOrders: (state, action) => {
+      state.orders = action.payload
+    },
   },
 })
 
@@ -65,4 +71,6 @@ export const {
   setCartItems,
   removeCartItem,
   deleteCartItem,
+  setOrder,
+  setOrders,
 } = userDataSlice.actions
