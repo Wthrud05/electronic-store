@@ -22,7 +22,7 @@ const Modal: FC<ModalProps> = ({ title, link, isOpen, scrollProp, color, image }
         <span>{title}</span>
       </div>
 
-      <Link to={link}>{link !== '' ? <span>Favorites</span> : null}</Link>
+      <Link to={link}>{link !== '' ? <span>Favorites</span> : ''}</Link>
     </div>
   )
 }

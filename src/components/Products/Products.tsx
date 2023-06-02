@@ -13,8 +13,6 @@ import { updateFavorites } from '../../helpers'
 import { Favorite } from '../../redux/user/types'
 import { useAuth } from '../../hooks/useAuth'
 import { addFavorite, removeFavorite } from '../../redux/userData/slice'
-import { setCartItem } from '../../redux/userData/slice'
-import { setChoosenColor, setProduct } from '../../redux/product/slice'
 
 interface ProductsProps {
   products: IProduct[]

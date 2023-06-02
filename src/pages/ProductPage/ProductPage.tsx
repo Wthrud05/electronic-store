@@ -11,6 +11,9 @@ import { addCartItem } from '../../redux/cart/slice'
 import ProductPageLoader from '../../components/Skeleton/ProductPageLoader'
 import { updateCartItems } from '../../helpers'
 import { setCartItem } from '../../redux/userData/slice'
+import { useAuth } from '../../hooks/useAuth'
+import Modal from '../../components/Modal/Modal'
+import mImage from '../../assets/images/error.svg'
 
 const ProductPage: FC = () => {
   const dispatch = useAppDispatch()
@@ -18,6 +21,14 @@ const ProductPage: FC = () => {
   const [loading, setLoading] = useState<boolean>(false)
   const [image, setImage] = useState<string | undefined>('')
   const [color, setColor] = useState<string | undefined>('')
+
+  const [isModal, setIsModal] = useState<boolean>(false)
+  const [modalImage, setModalImage] = useState<string>('')
+  const [scrollProp, setScrollProp] = useState<number>(0)
+  const [modalText, setModalText] = useState<string>('')
+
+  const { isAuth } = useAuth()
+  console.log(isAuth)
 
   const navigate = useNavigate()
   const { id } = useParams()
@@ -55,6 +66,14 @@ const ProductPage: FC = () => {
       : setImage(product.images.white)
   }, [product])
 
+  const onScroll = () => setScrollProp(window.scrollY)
+
+  useEffect(() => {
+    window.addEventListener('scroll', () => {
+      onScroll()
+    })
+  }, [])
+
   const productRating = [...new Array(product.rating)].map((_, i) => (
     <StarIcon key={i} src={star} />
   ))
@@ -71,10 +90,22 @@ const ProductPage: FC = () => {
   }
 
   const addToCart = () => {
-    dispatch(setCartItem(product))
-    setTimeout(() => {
-      navigate('/cart')
-    }, 100)
+    if (!isAuth) {
+      setModalImage(mImage)
+      setIsModal(true)
+      setModalText('You are not authorized!')
+
+      setTimeout(() => {
+        setIsModal(false)
+        setModalImage('')
+        setModalText('')
+      }, 3000)
+    } else {
+      dispatch(setCartItem(product))
+      setTimeout(() => {
+        navigate('/cart')
+      }, 100)
+    }
   }
 
   useEffect(() => {
@@ -83,6 +114,14 @@ const ProductPage: FC = () => {
 
   return (
     <>
+      <Modal
+        image={modalImage}
+        color="red"
+        isOpen={isModal}
+        scrollProp={0}
+        title={modalText}
+        link={''}
+      />
       {loading ? (
         <ProductPageLoader />
       ) : (

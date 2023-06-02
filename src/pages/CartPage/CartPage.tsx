@@ -14,9 +14,9 @@ import { getTotalPrice, getTotalProducts, updateCartItems } from '../../helpers'
 import CartPageLoader from '../../components/Skeleton/CartPageLoader'
 import { Link } from 'react-router-dom'
 import { setProducts, setProductsCount, setTotalPrice } from '../../redux/payment/slice'
+import NotAuthorized from '../../components/NotAuthorized/NotAuthorized'
 
 const CartPage: FC = () => {
-  const [items, setItems] = useState<any[]>([])
   const [loading, setLoading] = useState<boolean>(false)
   const dispatch = useAppDispatch()
 
@@ -35,13 +35,13 @@ const CartPage: FC = () => {
   const email: string = userLocal.email
 
   useEffect(() => {
-    setLoading(true)
     if (email) {
       dispatch(fetchUserData(email))
     }
   }, [])
 
   useEffect(() => {
+    setLoading(true)
     let data
     let cartItems
 
@@ -53,9 +53,10 @@ const CartPage: FC = () => {
 
     if (cartItems) {
       dispatch(setCartItems(cartItems))
-      setLoading(false)
     }
-    setLoading(false)
+    setTimeout(() => {
+      setLoading(false)
+    }, 200)
   }, [user])
 
   useEffect(() => {
@@ -68,10 +69,12 @@ const CartPage: FC = () => {
     dispatch(setTotalPrice(totalPrice))
   }
 
+  console.log(loading)
+
   return (
     <>
       {!isAuth ? (
-        <h1>You are not authorized</h1>
+        <NotAuthorized />
       ) : (
         <div className={styles.Cart}>
           <PageHeader name="Cart" path="/" icon={cart} />
@@ -79,24 +82,15 @@ const CartPage: FC = () => {
             <CartPageLoader />
           ) : (
             <>
-              {userCart.length ? (
-                <ul>
-                  {userCart.map((item: any) => {
-                    return (
-                      <li key={item.name + item.choosenColor}>
-                        <CartItem cartItem={item} />
-                      </li>
-                    )
-                  })}
-                </ul>
-              ) : (
-                <ul className={styles.CartEmpty}>
-                  <h1>
-                    Your cart is <span>Empty!</span>
-                  </h1>
-                  <img src={emptyCart} alt="empty-cart" />
-                </ul>
-              )}
+              <ul>
+                {userCart.map((item: any) => {
+                  return (
+                    <li key={item.name + item.choosenColor}>
+                      <CartItem cartItem={item} />
+                    </li>
+                  )
+                })}
+              </ul>
             </>
           )}
           <div className={styles.CartTotal}>
