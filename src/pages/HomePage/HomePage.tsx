@@ -37,12 +37,10 @@ const HomePage: FC = () => {
   useEffect(() => {
     let data
     let favorites
-    let cart
 
     for (let u in user) {
       data = { email: user[u].uData.email, name: user[u].uData.name, key: u }
       favorites = user[u].uFavorites
-      cart = user[u].uCart
     }
 
     dispatch(setUserData(data))
@@ -51,10 +49,6 @@ const HomePage: FC = () => {
       dispatch(setFavorites(favorites))
     } else {
       dispatch(setFavorites([]))
-    }
-
-    if (cart) {
-      dispatch(setCartItems(cart))
     }
   }, [user])
 

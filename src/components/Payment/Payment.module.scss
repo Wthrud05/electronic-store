@@ -166,6 +166,10 @@
     cursor: pointer;
     margin-top: 50px;
     transition: opacity .2s ease-in;
+
+    &:last-child {
+      margin-top: 15px;
+    }
     
     &:hover {
       opacity: .9;

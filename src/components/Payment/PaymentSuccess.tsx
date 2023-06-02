@@ -14,6 +14,7 @@ const PaymentSuccess: FC<PaymentSuccessProps> = ({ totalPrice }) => {
       <h1>Payment successful!</h1>
       <h1 className={styles.PaymentSuccessPrice}>{totalPrice} $</h1>
       <Link to={'/'}>To shop</Link>
+      <Link to={'/profile/orders'}>To orders</Link>
     </div>
   )
 }
