@@ -1,20 +1,20 @@
-import React, { FC, useEffect } from 'react'
+import React, { FC, useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
-import { Link } from 'react-router-dom'
 import { RootState, useAppDispatch } from '../../redux/store'
 import { setUserData, setOrders } from '../../redux/userData/slice'
 import { fetchUserData } from '../../redux/user/slice'
 import OrderItem from '../../components/OrderItem/OrderItem'
 import PageHeader from '../../components/PageHeader/PageHeader'
 import ordersIcon from '../../assets/images/orders.svg'
+import OrdersPageLoader from '../../components/Skeleton/OrdersPageLoader'
 
 const OrdersPage: FC = () => {
   const dispatch = useAppDispatch()
 
+  const [loading, setLoading] = useState<boolean>(false)
+
   const user = useSelector((state: RootState) => state.currentUser.currentUser)
   const orders = useSelector((state: RootState) => state.userData.orders)
-
-  console.log(orders)
 
   const userLocal = JSON.parse(localStorage.getItem('user') || '{}')
   const uemail: string = userLocal.email
@@ -26,6 +26,7 @@ const OrdersPage: FC = () => {
   }, [])
 
   useEffect(() => {
+    setLoading(true)
     let data
     let orders
 
@@ -38,19 +39,23 @@ const OrdersPage: FC = () => {
     if (orders) {
       dispatch(setOrders(orders))
     }
+
+    setTimeout(() => {
+      setLoading(false)
+    }, 200)
   }, [user])
 
   return (
     <div>
       <PageHeader name="Orders" path="/profile" icon={ordersIcon} />
-      {orders.length ? (
+      {loading ? (
+        <OrdersPageLoader />
+      ) : (
         <>
           {orders.map((order, i) => (
             <OrderItem key={i} orderNum={i} order={order} />
           ))}
         </>
-      ) : (
-        <h1>LOADING...</h1>
       )}
     </div>
   )

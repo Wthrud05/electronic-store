@@ -2,10 +2,7 @@ import React, { FC } from 'react'
 import styles from './FavoriteItem.module.scss'
 import Button from '../Button/Button'
 import redheart from '../../assets/images/red-heart.svg'
-import { removeFavorite } from '../../redux/userData/slice'
-import { RootState, useAppDispatch } from '../../redux/store'
-import { updateFavorites } from '../../helpers'
-import { useSelector } from 'react-redux'
+import { useAppDispatch } from '../../redux/store'
 
 interface FavoriteItemProps {
   id: string
@@ -19,8 +16,6 @@ interface FavoriteItemProps {
 }
 
 const FavoriteItem: FC<FavoriteItemProps> = ({ id, name, price, images, removeFromFavorite }) => {
-  const dispatch = useAppDispatch()
-
   return (
     <div className={styles.FavoriteItem}>
       <div className={styles.FavoriteItemImage}>

@@ -1,7 +1,7 @@
 import React, { FC, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useAuth } from '../../hooks/useAuth'
-import { removeUser, setUser } from '../../redux/auth/slice'
+import { removeUser } from '../../redux/auth/slice'
 import { RootState, useAppDispatch } from '../../redux/store'
 import styles from './index.module.scss'
 import { Link } from 'react-router-dom'
@@ -21,8 +21,9 @@ const ProfilePage: FC = () => {
   const userLocal = JSON.parse(localStorage.getItem('user') || '{}')
   const uemail: string = userLocal.email
 
-  const userData = useSelector((state: RootState) => state.userData.data)
   const user = useSelector((state: RootState) => state.currentUser.currentUser)
+
+  const firstChar = name?.slice(0, 1)
 
   const handleLogOut = () => {
     navigate('/login')
@@ -54,16 +55,12 @@ const ProfilePage: FC = () => {
       favorites = user[u].uFavorites
     }
     dispatch(setUserData(data))
-
-    // if (favorites) {
-    //   dispatch(setFavorites(favorites))
-    // }
   }, [user])
 
   return (
     <div className={styles.Profile}>
       <PageHeader name="Profile" path={'/'} icon={profile} />
-      <div className={styles.Profile_Img}>A</div>
+      <div className={styles.Profile_Img}>{firstChar}</div>
       <div className={styles.Profile_Info}>
         <h2>{name}</h2>
         <span>{email}</span>

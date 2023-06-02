@@ -55,10 +55,10 @@ const PaymentPage = () => {
   const paymentHandler = () => {
     setIsLoading(true)
     dispatch(setOrder(order))
+    dispatch(setCartItems([]))
     setTimeout(() => {
       setIsPaymentSucess(true)
       setIsLoading(false)
-      dispatch(setCartItems([]))
     }, 1500)
   }
 

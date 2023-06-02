@@ -4,10 +4,8 @@ import styles from './CartItem.module.scss'
 import minus from '../../assets/images/minus.svg'
 import plus from '../../assets/images/plus.svg'
 import cross from '../../assets/images/cross.svg'
-import { RootState, useAppDispatch } from '../../redux/store'
+import { useAppDispatch } from '../../redux/store'
 import { deleteCartItem, removeCartItem, setCartItem } from '../../redux/userData/slice'
-import { updateCartItems } from '../../helpers'
-import { useSelector } from 'react-redux'
 
 interface CartItemProps {
   cartItem: IProduct

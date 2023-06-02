@@ -22,7 +22,6 @@ const Products: FC<ProductsProps> = ({ products }) => {
   const dispatch = useAppDispatch()
   const favorites = useSelector((state: RootState) => state.userData.favorites)
   const userData = useSelector((state: RootState) => state.userData.data)
-  const currentProduct = useSelector((state: RootState) => state.product.product)
 
   const { isAuth } = useAuth()
 

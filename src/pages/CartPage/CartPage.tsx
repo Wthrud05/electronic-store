@@ -69,8 +69,6 @@ const CartPage: FC = () => {
     dispatch(setTotalPrice(totalPrice))
   }
 
-  console.log(loading)
-
   return (
     <>
       {!isAuth ? (
@@ -82,15 +80,24 @@ const CartPage: FC = () => {
             <CartPageLoader />
           ) : (
             <>
-              <ul>
-                {userCart.map((item: any) => {
-                  return (
-                    <li key={item.name + item.choosenColor}>
-                      <CartItem cartItem={item} />
-                    </li>
-                  )
-                })}
-              </ul>
+              {userCart.length ? (
+                <ul>
+                  {userCart.map((item: any) => {
+                    return (
+                      <li key={item.name + item.choosenColor}>
+                        <CartItem cartItem={item} />
+                      </li>
+                    )
+                  })}
+                </ul>
+              ) : (
+                <ul className={styles.CartEmpty}>
+                  <h1>
+                    Your Cart Is<span>Empty</span>
+                  </h1>
+                  <img src={emptyCart} alt="empty-cart" />
+                </ul>
+              )}
             </>
           )}
           <div className={styles.CartTotal}>

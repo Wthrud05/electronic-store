@@ -1,8 +1,6 @@
 import React, { FC } from 'react'
 import styles from './Categories.module.scss'
 import { categories } from '../../data/data'
-import { useSelector } from 'react-redux'
-
 interface CategoryProps {
   category: string
   onCategoryChange: (category: string) => void

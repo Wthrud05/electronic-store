@@ -12,8 +12,8 @@ const OrderItem: FC<OrderItemProps> = ({ order, orderNum }) => {
     <div className={styles.OrderItem} key={order.totalPrice}>
       <span>№{orderNum + 1}</span>
       <ul>
-        {order.products.map((product) => (
-          <li key={product.name}>
+        {order.products.map((product, i) => (
+          <li key={i}>
             {/* 
               // @ts-ignore */}
             <img src={product.images[product.choosenColor]} alt="" /> {product.name}

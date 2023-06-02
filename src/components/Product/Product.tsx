@@ -1,12 +1,11 @@
-import React, { FC, useEffect } from 'react'
+import React, { FC } from 'react'
 import styles from './Product.module.scss'
-import Button from '../Button/Button'
 import { Link } from 'react-router-dom'
 import star from '../../assets/images/star.svg'
 import heart from '../../assets/images/heart.svg'
 import redheart from '../../assets/images/red-heart.svg'
 import StarIcon from '../StarIcon/StarIcon'
-import { RootState, useAppDispatch } from '../../redux/store'
+import { RootState } from '../../redux/store'
 import { useSelector } from 'react-redux'
 import { Favorite } from '../../redux/user/types'
 
@@ -24,8 +23,6 @@ interface ProductProps {
 }
 
 const Product: FC<ProductProps> = ({ id, name, price, rating, images, addFav, removeFav }) => {
-  const dispatch = useAppDispatch()
-
   const productRating = [...new Array(rating)].map((_, i) => <StarIcon key={i} src={star} />)
 
   const favorites = useSelector((state: RootState) => state.userData.favorites)
