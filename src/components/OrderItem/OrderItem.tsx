@@ -16,7 +16,8 @@ const OrderItem: FC<OrderItemProps> = ({ order, orderNum }) => {
           <li key={i}>
             {/* 
               // @ts-ignore */}
-            <img src={product.images[product.choosenColor]} alt="" /> {product.name}
+            <img src={product.images[product.choosenColor]} alt="" />
+            <span>{product.name}</span>
           </li>
         ))}
       </ul>

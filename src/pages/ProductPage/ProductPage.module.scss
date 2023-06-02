@@ -5,6 +5,12 @@
   display: flex;
   margin-top: 40px;
 
+  @media (max-width: 860px) {
+    flex-direction: column;
+    padding-top: 45px;
+    margin-top: 0px;
+  }
+
   &Back {
     position: absolute;
     top: 0;
@@ -36,25 +42,65 @@
     align-items: center;
     border-radius: 15px;
 
+    @media (max-width: 860px) {
+      margin-bottom: 20px;
+    }
+
     img {
       width: 550px;
       height: 500px;
+
+      @media (max-width: 1200px) {
+        width: 450px;
+        height: 400px;
+      }
+
+      @media (max-width: 1080px) {
+        width: 350px;
+        height: 300px;
+      }
+
+      @media (max-width: 860px) {
+        width: 250px;
+        height: 200px;
+      }
     }
   }
 
   &Info {
     margin-left: 50px;
 
+    @media (max-width: 860px) {
+      margin-left: 0;
+    }
+
     h1 {
       font-size: 40px;
       margin-bottom: 10px;
       max-width: 450px;
+
+      @media (max-width: 1200px) {
+        font-size: 32px;
+        max-width: 250px;
+      }
+
+      @media (max-width: 1080px) {
+        font-size: 24px;
+      }
     }
 
     p {
       color: $grey;
       margin-bottom: 10px;
       font-size: 24px;
+
+      @media (max-width: 1200px) {
+        font-size: 18px;
+      }
+
+      @media (max-width: 1080px) {
+        font-size: 16px;
+      }
     }
   }
 
@@ -68,6 +114,10 @@
     padding: 20px 0;
     border-bottom: 1px solid $grey;
     font-size: 30px;
+
+    @media (max-width: 1200px) {
+      font-size: 24px;
+    }
   }
 
   &Colors {
@@ -77,6 +127,10 @@
     span {
       font-size: 20px;
       color: $grey;
+
+      @media (max-width: 1200px) {
+        font-size: 18px;
+      }
     }
 
     .ProductColorsWrapper {
@@ -106,6 +160,10 @@
     span {
       font-size: 20px;
       color: $grey;
+
+      @media (max-width: 1200px) {
+        font-size: 18px;
+      }
     }
 
     ul {
@@ -113,6 +171,16 @@
 
       li {
         margin-top: 10px;
+
+        @media (max-width: 960px) {
+          display: flex;
+          flex-direction: column;
+        }
+
+        @media (max-width: 860px) {
+          flex-direction: row;
+          justify-content: space-between;
+        }
       }
     }
   }
@@ -131,6 +199,12 @@
 
       &:last-child {
         margin: 0;
+      }
+
+      @media (max-width: 1080px) {
+        width: 150px;
+        height: 40px;
+        font-size: 16px;
       }
     }
 

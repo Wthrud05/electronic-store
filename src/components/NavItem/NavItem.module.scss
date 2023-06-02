@@ -4,6 +4,16 @@
   margin-right: 30px;
   list-style: none;
 
+  @media (max-width: 760px) {
+    margin: 0;
+    width: 200px;
+    margin-bottom: 10px;
+
+    &:last-child {
+      margin: 0;
+    }
+  }
+
   &:nth-child(3n) {
     margin-right: 0;
   }
@@ -17,6 +27,14 @@
     font-size: 20px;
     font-weight: 500;
 
+    @media (max-width: 760px) {
+      justify-content: space-evenly;
+
+      span {
+        width: 75px;
+      }
+    }
+
     &:hover {
       color: $green;
     } 
@@ -29,6 +47,7 @@
       width: 35px;
       height: 35px;
     }
+    
   }
 
   .Active {

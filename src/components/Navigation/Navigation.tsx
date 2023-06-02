@@ -1,14 +1,31 @@
-import React, { FC } from 'react'
+import React, { FC, useEffect, useState } from 'react'
 import styles from './Navigation..module.scss'
 import { navigationData } from '../../data/data'
 import NavItem from '../NavItem/NavItem'
+import burger from '../../assets/images/burger.svg'
 
 const Navigation: FC = () => {
+  const [isOpen, setIsOpen] = useState<boolean>(false)
+
+  const handler = (isOpen: boolean) => {
+    setIsOpen(isOpen)
+  }
+
   return (
     <div className={styles.Navigation}>
-      <ul>
+      <button onClick={() => setIsOpen(!isOpen)} className={styles.NavigationBurger}>
+        <img src={burger} alt="burger" />
+      </button>
+      <ul className={isOpen ? styles.Open : ''}>
         {navigationData.map((item) => (
-          <NavItem key={item.title} icon={item.icon} title={item.title} page={item.page} />
+          <NavItem
+            handler={handler}
+            isOpen={isOpen}
+            key={item.title}
+            icon={item.icon}
+            title={item.title}
+            page={item.page}
+          />
         ))}
       </ul>
     </div>

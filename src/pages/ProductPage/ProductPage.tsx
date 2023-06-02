@@ -27,7 +27,6 @@ const ProductPage: FC = () => {
   const [modalText, setModalText] = useState<string>('')
 
   const { isAuth } = useAuth()
-  console.log(isAuth)
 
   const navigate = useNavigate()
   const { id } = useParams()
@@ -155,14 +154,15 @@ const ProductPage: FC = () => {
               <ul>
                 {product.characteristics?.map((ch) => (
                   <li key={ch.name}>
-                    <b>{ch.name}</b> - {ch.value}
+                    <b>{ch.name}&nbsp; </b>
+                    <span>{ch.value}</span>
                   </li>
                 ))}
               </ul>
             </div>
             <div className={styles.ProductBtn}>
               <button onClick={() => addToCart()} className={styles.ProductBtnsBuy}>
-                Buy now
+                Add to cart
               </button>
             </div>
           </div>

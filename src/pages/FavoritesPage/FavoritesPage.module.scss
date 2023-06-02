@@ -42,8 +42,6 @@
     }
   }
 
-  
-
   ul {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
@@ -51,6 +49,12 @@
     justify-self: center;
     gap: 30px;
     row-gap: 50px;
+
+    @media (max-width: 1400px) {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
   }
 
   .Loaders {

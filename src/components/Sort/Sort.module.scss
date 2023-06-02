@@ -12,6 +12,10 @@
 
     b {
       margin-right: 10px;
+
+      @media (max-width: 1225px) {
+        display: none;
+      }
     }
 
     div {

@@ -56,6 +56,7 @@ const PaymentPage = () => {
     setIsLoading(true)
     dispatch(setOrder(order))
     dispatch(setCartItems([]))
+    updateCartItems(userData, userCart)
     setTimeout(() => {
       setIsPaymentSucess(true)
       setIsLoading(false)

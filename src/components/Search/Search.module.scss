@@ -3,6 +3,10 @@
 .Search {
   position: relative;
 
+  @media (max-width: 1080px) {
+    display: none;
+  }
+
   input {
     padding: 10px 40px;
     width: 300px;

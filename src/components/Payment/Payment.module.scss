@@ -14,6 +14,10 @@
     font-weight: 600;
     text-align: center;
     margin-bottom: 30px;
+
+    @media (max-width: 640px) {
+      font-size: 24px;
+    }
   }
 
   img {
@@ -39,6 +43,10 @@
         border-color: $green;
         box-shadow: 0px 0px 5px $green ;
       }
+
+      @media (max-width: 640px) {
+        width: 220px;
+      }
     }
 
     label {
@@ -62,6 +70,10 @@
         input {
           margin-right: 10px;
           width: 130px;
+
+          @media (max-width: 640px) {
+            width: 100px;
+          }
 
           &:last-child {
             margin: 0;
@@ -122,6 +134,7 @@
   border-radius: 15px;
   padding: 30px;
   box-shadow: 0px 0px 5px rgba(0, 0, 0, .5);
+  text-align: center;
 
   img {
     margin: 30px 0;

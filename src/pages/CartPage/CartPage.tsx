@@ -103,10 +103,10 @@ const CartPage: FC = () => {
           <div className={styles.CartTotal}>
             <div>
               <p>
-                Total price: <span>{totalPrice} $</span>
+                <i>Total price:</i> <span>{totalPrice} $</span>
               </p>
               <p>
-                Products: <span>{totalProducts}</span>
+                <i>Products:</i> <span>{totalProducts}</span>
               </p>
             </div>
             <Link onClick={orderHandler} to={totalProducts > 0 ? '/payment' : '/cart'}>
