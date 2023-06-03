@@ -52,8 +52,6 @@ const PaymentPage = () => {
     updateCartItems(userData, userCart)
   }, [userCart])
 
-  console.log(userCart)
-
   const paymentHandler = () => {
     setIsLoading(true)
     dispatch(setOrder(order))

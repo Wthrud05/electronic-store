@@ -19,20 +19,20 @@ const Form: FC<FormProps> = ({ title, handleClick, isRegister }) => {
           type="text"
           value={name}
           onChange={(e) => setName(e.target.value)}
-          placeholder="Name"
+          placeholder="user name"
         />
       )}
       <input
         type="email"
         value={email}
         onChange={(e) => setEmail(e.target.value)}
-        placeholder="Email"
+        placeholder="example@mail.com"
       />
       <input
         type="password"
         value={pass}
         onChange={(e) => setPass(e.target.value)}
-        placeholder="Password"
+        placeholder="password"
       />
       <button onClick={() => handleClick(name, email, pass)}>{title}</button>
     </div>

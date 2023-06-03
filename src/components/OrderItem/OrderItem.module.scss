@@ -23,9 +23,11 @@
     li {
       display: flex;
       align-items: center;
+      width: 450px;
 
       @media (max-width: 760px) {
         margin: 10px 0;
+        width: 250px;
 
         span {
           max-width: 250px;
