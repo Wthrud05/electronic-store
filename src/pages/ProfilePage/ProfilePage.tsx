@@ -59,18 +59,18 @@ const ProfilePage: FC = () => {
 
   return (
     <div className={styles.Profile}>
-      <PageHeader name="Profile" path={'/'} icon={profile} />
+      <PageHeader name="Profile" path={'/electronic-store/'} icon={profile} />
       <div className={styles.Profile_Img}>{firstChar}</div>
       <div className={styles.Profile_Info}>
         <h2>{name}</h2>
         <span>{email}</span>
       </div>
       <div className={styles.Profile_Chapters}>
-        <Link to={'/profile/orders'}>
+        <Link to={'/electronic-store/profile/orders'}>
           <img src={orders} alt="orders" />
           <span>Orders</span>
         </Link>
-        <Link to={'/profile/favorites'}>
+        <Link to={'/electronic-store/profile/favorites'}>
           <img src={favorites} alt="favorites" />
           <span>Favorites</span>
         </Link>

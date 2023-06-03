@@ -84,7 +84,7 @@ const ProductPage: FC = () => {
   }
 
   const back = () => {
-    navigate('/')
+    navigate('/electronic-store')
   }
 
   const addToCart = () => {
@@ -101,7 +101,7 @@ const ProductPage: FC = () => {
     } else {
       dispatch(setCartItem(product))
       setTimeout(() => {
-        navigate('/cart')
+        navigate('/electronic-store/cart')
       }, 100)
     }
   }

@@ -9,7 +9,7 @@ const RegisterPage: FC = () => {
       <h1>Create an account</h1>
       <Register />
       <p>
-        Already have an account? <Link to={'/login'}>Sign in</Link>
+        Already have an account? <Link to={'/electronic-store/login'}>Sign in</Link>
       </p>
     </div>
   )

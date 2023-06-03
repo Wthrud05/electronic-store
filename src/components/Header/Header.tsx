@@ -10,10 +10,10 @@ const Header: FC = () => {
 
   return (
     <div className={styles.Header}>
-      <Link className={styles.Logo} to={'/'}>
+      <Link className={styles.Logo} to={'/electronic-store/'}>
         <img src={logo} alt="logo" />
       </Link>
-      {location === '/' ? <Search /> : null}
+      {location === '/electronic-store/' ? <Search /> : null}
       <Navigation />
     </div>
   )

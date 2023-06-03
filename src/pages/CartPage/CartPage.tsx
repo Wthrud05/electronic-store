@@ -75,7 +75,7 @@ const CartPage: FC = () => {
         <NotAuthorized />
       ) : (
         <div className={styles.Cart}>
-          <PageHeader name="Cart" path="/" icon={cart} />
+          <PageHeader name="Cart" path="/electronic-store/" icon={cart} />
           {loading ? (
             <CartPageLoader />
           ) : (
@@ -109,7 +109,10 @@ const CartPage: FC = () => {
                 <i>Products:</i> <span>{totalProducts}</span>
               </p>
             </div>
-            <Link onClick={orderHandler} to={totalProducts > 0 ? '/payment' : '/cart'}>
+            <Link
+              onClick={orderHandler}
+              to={totalProducts > 0 ? '/electronic-store/payment' : '/electronic-store/cart'}
+            >
               Make an order
             </Link>
           </div>

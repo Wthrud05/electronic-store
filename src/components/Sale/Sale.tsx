@@ -9,7 +9,7 @@ const Sale = () => {
     <div className={styles.Sale}>
       <div className={styles.SaleLeft}>
         <h1>Get -30% off on selected headphones</h1>
-        <Link to={'/product/:1'}>Buy now</Link>
+        <Link to={'/electronic-store/product/:1'}>Buy now</Link>
       </div>
       <div>
         <img src={saleProduct} alt="sale-product" />

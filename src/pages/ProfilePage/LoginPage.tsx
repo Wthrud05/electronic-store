@@ -10,7 +10,7 @@ const LoginPage: FC = () => {
       <Login />
       <p>
         Don't have an account yet?
-        <Link to={'/register'}> register</Link>
+        <Link to={'/electronic-store/register'}> register</Link>
       </p>
     </div>
   )

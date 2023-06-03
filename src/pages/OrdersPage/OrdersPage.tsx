@@ -47,7 +47,7 @@ const OrdersPage: FC = () => {
 
   return (
     <div>
-      <PageHeader name="Orders" path="/profile" icon={ordersIcon} />
+      <PageHeader name="Orders" path="/electronic-store/profile" icon={ordersIcon} />
       {loading ? (
         <OrdersPageLoader />
       ) : (

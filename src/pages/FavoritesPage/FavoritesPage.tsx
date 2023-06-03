@@ -87,7 +87,7 @@ const FavoritesPage: FC = () => {
 
   return (
     <div className={styles.FavoritesPage}>
-      <PageHeader name="Favorites" path="/profile" icon={favorite} />
+      <PageHeader name="Favorites" path="/electronic-store/profile" icon={favorite} />
       {isLoading ? (
         <div className={styles.Loaders}>{loaders}</div>
       ) : (

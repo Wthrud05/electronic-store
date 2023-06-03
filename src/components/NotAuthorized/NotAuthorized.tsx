@@ -8,7 +8,7 @@ const NotAuthorized = () => {
     <div className={styles.NotAuth}>
       <img src={notAuth} alt="not-auth" />
       <p>You are not authorized!</p>
-      <Link to={'/profile'}>Log In</Link>
+      <Link to={'/electronic-store/profile'}>Log In</Link>
     </div>
   )
 }

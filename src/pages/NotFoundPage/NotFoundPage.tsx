@@ -9,7 +9,7 @@ const NotFoundPage: FC = () => {
       <img src={errorFace} alt="error" />
       <h1>Page not found</h1>
       <p>Sorry, but the requsted page is not found</p>
-      <Link to={'/'}>Back to the shop</Link>
+      <Link to={'electronic-store//'}>Back to the shop</Link>
     </div>
   )
 }
