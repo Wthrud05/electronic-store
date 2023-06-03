@@ -26,7 +26,7 @@ const ProfilePage: FC = () => {
   const firstChar = name?.slice(0, 1)
 
   const handleLogOut = () => {
-    navigate('/login')
+    navigate('/electronic-store/login')
     dispatch(removeUser())
     localStorage.removeItem('user')
     dispatch(setFavorites([]))
@@ -36,7 +36,7 @@ const ProfilePage: FC = () => {
 
   useEffect(() => {
     if (!isAuth) {
-      navigate('/login')
+      navigate('/electronic-store/login')
     }
   }, [isAuth])
 

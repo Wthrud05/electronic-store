@@ -52,7 +52,7 @@ const Login = () => {
           'user',
           JSON.stringify({ name, email: user.email, token: user.refreshToken, id: user.uid }),
         )
-        navigate('/profile')
+        navigate('/electronic-store/profile')
       })
       .catch(() => alert('User was not found!'))
   }

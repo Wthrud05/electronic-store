@@ -37,7 +37,7 @@ const Products: FC<ProductsProps> = ({ products }) => {
       dispatch(addFavorite(product))
       setIsModal(true)
       setModalText('Added to favorites!')
-      setModalLink('/profile/favorites')
+      setModalLink('/electronic-store/profile/favorites')
       setImage(okey)
 
       setTimeout(() => {

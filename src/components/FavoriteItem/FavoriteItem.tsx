@@ -2,7 +2,6 @@ import React, { FC } from 'react'
 import styles from './FavoriteItem.module.scss'
 import Button from '../Button/Button'
 import redheart from '../../assets/images/red-heart.svg'
-import { useAppDispatch } from '../../redux/store'
 
 interface FavoriteItemProps {
   id: string
